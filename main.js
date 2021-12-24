@@ -4,7 +4,7 @@ import router from './router'
 import VueCookies from 'vue3-cookies'
 
 createApp(App).use(VueCookies, {
-    expireTimes: "30d",	
+    expireTimes: Infinity,	
     httpOnly:true,
     secure: true,
     sameSite: "None"

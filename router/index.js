@@ -13,7 +13,7 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../components/Redirect.vue')
+    component: () => import('../components/Redirect.vue')
   },
   {
     path: '/home',
@@ -21,7 +21,31 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../components/Home.vue')
+    component: () => import('../components/Home.vue')
+  },
+  {
+    path: '/toptracks',
+    name: 'TopTrack',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import('../components/Top.vue')
+  },
+  {
+    path: '/topartists',
+    name: 'TopArtist',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import('../components/Top.vue')
+  },
+  {
+    path: '/playlist',
+    name: 'Playlist',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import('../components/Playlist.vue')
   },
 ]
 

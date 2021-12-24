@@ -4,3 +4,15 @@
 	font-weight: normal;
 	font-style: normal;
 }
+@font-face{
+	font-family: "Circular";
+	src: url("./assets/fonts/Circular/Circular/CircularStd-Light.otf");
+	font-weight: light;
+	font-style: normal;
+}
+@font-face{
+	font-family: "Circular";
+	src: url("./assets/fonts/Circular/Circular/CircularStd-Bold.otf");
+	font-weight: bold;
+	font-style: normal;
+}

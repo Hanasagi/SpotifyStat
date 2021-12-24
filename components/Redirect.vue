@@ -6,7 +6,7 @@
 export default {
   name: 'Login',
   mounted(){
-	this.checkSearchParams();
+		this.checkSearchParams();
   },
   methods:{
 		checkSearchParams(){
@@ -44,7 +44,7 @@ export default {
 		storeInCookies(token){
 			this.$cookies.set("token",token.access_token);
 			this.$cookies.set("refresh",token.refresh_token);
-			localStorage.setItem("expires_in",token.expires_in);
+			localStorage.setItem("expires_in",Date.now()+(token.expires_in*1000));
 			this.$router.push({name:"Home"})
 		}
 
