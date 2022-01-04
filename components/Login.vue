@@ -47,7 +47,7 @@ export default {
         }).then(response => {
           return response.json();
         }).then(response => {
-          this.storeInCookies(response);
+          this.storeNewToken(response);
         }).catch((error) => console.error(error.message));
     },
     storeNewToken(token){
@@ -82,6 +82,11 @@ export default {
     background: none;
     border: 1px solid var(--spotify-color);
     color: white;
+  }
+  @media screen and (max-width:1100px){
+    .loginWithSpotify{
+          font-size: 8vw;
+    }
   }
 
 </style>

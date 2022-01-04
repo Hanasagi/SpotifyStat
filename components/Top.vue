@@ -9,7 +9,7 @@
       <div v-if="path==='/toptracks'">
         <div class="grid" v-if="currentTime==='allTime'">
           <div v-for="(item,index) in allTimeTop['items']" :key="item" class="user-track" >
-               <div :data-link="'https://open.spotify.com/album/'+item.album.id" @click="openSpotify"><img class="top-img" :src="item.album.images[1].url">
+               <div :data-link="'https://open.spotify.com/album/'+item.album.id" @click="openSpotify" tabindex="0"  @keydown.enter="openSpotify"><img class="top-img" :src="item.album.images[1].url">
             <div class="track-info">
               <div class="track-title">
                 <h5>{{index+1}}. {{item.name}}</h5>
@@ -24,7 +24,7 @@
         </div>
         <div class="grid" v-if="currentTime==='6Months'">
           <div v-for="(item,index) in sixMonthsTop['items']" :key="item" class="user-track" >
-            <div :data-link="'https://open.spotify.com/album/'+item.album.id" @click="openSpotify"><img class="top-img" :src="item.album.images[1].url">
+            <div :data-link="'https://open.spotify.com/album/'+item.album.id" @click="openSpotify" tabindex="0"  @keydown.enter="openSpotify"><img class="top-img" :src="item.album.images[1].url">
             <div class="track-info">
               <div class="track-title">
                 <h5>{{index+1}}. {{item.name}}</h5>
@@ -40,7 +40,7 @@
         </div>
         <div class="grid" v-if="currentTime==='4Weeks'">
           <div v-for="(item,index) in fourWeeksTop['items']" :key="item" class="user-track" >
-             <div :data-link="'https://open.spotify.com/album/'+item.album.id" @click="openSpotify"><img class="top-img" :src="item.album.images[1].url">
+             <div :data-link="'https://open.spotify.com/album/'+item.album.id" @click="openSpotify" tabindex="0"  @keydown.enter="openSpotify"><img class="top-img" :src="item.album.images[1].url">
             <div class="track-info">
               <div class="track-title">
                 <h5>{{index+1}}. {{item.name}}</h5>
@@ -57,7 +57,7 @@
       <div v-else>
         <div class="grid-artist" v-if="currentTime==='allTime'">
           <div v-for="(item,index) in allTimeTop['items']" :key="index" class="user-artist" >
-          <div :data-link="'https://open.spotify.com/artist/'+item.id" @click="openSpotify">
+          <div :data-link="'https://open.spotify.com/artist/'+item.id" @click="openSpotify" tabindex="0"  @keydown.enter="openSpotify">
               <div>
               <img class="top-img" :src="item.images[1].url">
             </div>
@@ -69,7 +69,7 @@
         </div>
         <div class="grid-artist" v-if="currentTime==='6Months'">
           <div v-for="(item,index) in sixMonthsTop['items']" :key="index" class="user-artist" >
-           <div :data-link="'https://open.spotify.com/artist/'+item.id" @click="openSpotify">
+           <div :data-link="'https://open.spotify.com/artist/'+item.id" @click="openSpotify" tabindex="0"  @keydown.enter="openSpotify">
               <div>
               <img class="top-img" :src="item.images[1].url">
             </div>
@@ -81,7 +81,7 @@
         </div>
         <div class="grid-artist" v-if="currentTime==='4Weeks'">
           <div v-for="(item,index) in fourWeeksTop['items']" :key="index" class="user-artist">
-            <div :data-link="'https://open.spotify.com/artist/'+item.id" @click="openSpotify">
+            <div :data-link="'https://open.spotify.com/artist/'+item.id" @click="openSpotify" tabindex="0"  @keydown.enter="openSpotify">
               <div>
               <img class="top-img" :src="item.images[1].url">
             </div>
@@ -215,6 +215,16 @@ export default {
    flex-direction: column;
    align-items: center;
    position: relative;
+ }
+ .user-artist:focus{
+   outline:1px solid var(--spotify-color);
+ }
+  .user-artist div:focus h5{
+  color: var(--spotify-color);
+ }
+
+  .user-track>div:focus>.track-info>.track-title{
+  color: #b152c9;
  }
  .user-track>div{
     width: auto;

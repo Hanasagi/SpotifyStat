@@ -7,11 +7,13 @@ export default {
   name: 'Token',
   emits: ["childLoaded"],
   mounted(){
+    console.log("child 1")
     this.isLoggedOn();
+    console.log("child 2")
   },
   methods:{
     async isLoggedOn(){
-      if(this.$cookies.get("token")!==null && Date.now()>localStorage.getItem("expires_in")){
+      if(this.$cookies.get("token")!==null || Date.now()>localStorage.getItem("expires_in")){
           await this.fetchNewToken();
       }
       this.$emit("childLoaded")

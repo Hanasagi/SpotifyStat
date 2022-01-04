@@ -1,6 +1,6 @@
 <template>
-  <Token @childLoaded="childIsReady"/>
   <div class="home">
+    <Token @childLoaded="childIsReady"/>
     <div v-if="loading">
       <div class="loading" ></div>
     </div>
@@ -61,6 +61,7 @@
 <script>
   import Token from './Token.vue';
   import Navbar from './Navbar.vue';
+  import AsyncLocalStorage from '@createnextapp/async-local-storage'
 
 export default {
   name: 'Home',
@@ -81,6 +82,7 @@ export default {
   },
   methods:{
     childIsReady(){
+      console.log("parent 1")
       if(this.$cookies.get("token") === null || this.$cookies.get("token")===undefined){
         this.$router.push({name:'Login'})
       }
@@ -88,6 +90,7 @@ export default {
         if(localStorage.getItem("state") !=null){
           localStorage.removeItem("state");
         }
+        console.log(this.$cookies.get("token"))
         this.fetchTopItems();
         this.fetchUserInfo();
       }
@@ -121,7 +124,6 @@ export default {
         return response;
       }).catch((error) => console.error(error.message));
 
-
       let user=[];
       this.$cookies.set("userId",getUserInfo.id)
       user.push({"profilePicture":getUserInfo.images[0].url});
@@ -129,11 +131,8 @@ export default {
       user.push({"followers":getUserInfo.followers.total});
       user.push({"following":getArtistFollow.artists.total})
       user.push({"playlistNumber":getUserPlaylist.total})
-      localStorage.setItem("user",JSON.stringify(user));
+      await AsyncLocalStorage.setItem("user",JSON.stringify(user));
       this.user=user;
-
-      localStorage.setItem("playlist",JSON.stringify(getUserPlaylist))
-
     },
     async fetchTopItems(){
      let headers={headers:{"Authorization":`Bearer ${this.$cookies.get("token")}`,"Content":"application/json"}}
@@ -192,12 +191,12 @@ export default {
 
     //Store Item 
 
-      localStorage.setItem("topTrackAllTime",JSON.stringify(topTracksLongTerm));
-      localStorage.setItem("topTrack6Months",JSON.stringify(topTracksMediumTerm)); 
-      localStorage.setItem("topTrack4Weeks",JSON.stringify(topTracksShortTerm)); 
-      localStorage.setItem("topArtistAllTime",JSON.stringify(topArtistsLongTerm));
-      localStorage.setItem("topArtist6Months",JSON.stringify(topArtistsMediumTerm)); 
-      localStorage.setItem("topArtist4Weeks",JSON.stringify(topArtistsShortTerm)); 
+      await AsyncLocalStorage.setItem("topTrackAllTime",JSON.stringify(topTracksLongTerm));
+      await AsyncLocalStorage.setItem("topTrack6Months",JSON.stringify(topTracksMediumTerm)); 
+      await AsyncLocalStorage.setItem("topTrack4Weeks",JSON.stringify(topTracksShortTerm)); 
+      await AsyncLocalStorage.setItem("topArtistAllTime",JSON.stringify(topArtistsLongTerm));
+      await AsyncLocalStorage.setItem("topArtist6Months",JSON.stringify(topArtistsMediumTerm)); 
+      await AsyncLocalStorage.setItem("topArtist4Weeks",JSON.stringify(topArtistsShortTerm)); 
 
     },
     updateInfo(){
