@@ -1,5 +1,5 @@
 <template>
-<div class="left-nav">
+<nav class="left-nav">
           <div class="left-wrapper">
             <div @click="goTo" data-link="Home">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 7.001c0 3.865-3.134 7-7 7s-7-3.135-7-7c0-3.867 3.134-7.001 7-7.001s7 3.134 7 7.001zm-1.598 7.18c-1.506 1.137-3.374 1.82-5.402 1.82-2.03 0-3.899-.685-5.407-1.822-4.072 1.793-6.593 7.376-6.593 9.821h24c0-2.423-2.6-8.006-6.598-9.819z"/></svg><h5>PROFILE</h5></div>
@@ -11,7 +11,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M6 23v-11c-4.036 0-6 2.715-6 5.5 0 2.807 1.995 5.5 6 5.5zm18-5.5c0-2.785-1.964-5.5-6-5.5v11c4.005 0 6-2.693 6-5.5zm-12-13.522c-3.879-.008-6.861 2.349-7.743 6.195-.751.145-1.479.385-2.161.716.629-5.501 4.319-9.889 9.904-9.889 5.589 0 9.29 4.389 9.916 9.896-.684-.334-1.415-.575-2.169-.721-.881-3.85-3.867-6.205-7.747-6.197z"/></svg>
             <h5>TOP ARTISTS</h5></div>
           </div>
-        </div>
+        </nav>
 </template>
 
 <script>
@@ -76,13 +76,16 @@ export default {
 
   @media screen and (max-width: 1100px){
     .left-wrapper{
-      width: 9vw;
+      width: 12vw;
+    }
+    .left-wrapper>div{
+      margin: 7vw auto;
     }
     .left-wrapper > div > svg{
       width: 4vw;
     }
     .left-wrapper>div >h5{
-      font-size: 1.8vw;
+      font-size:2.8vw;
     }
   }
 

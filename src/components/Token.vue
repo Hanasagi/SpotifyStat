@@ -19,8 +19,8 @@ export default {
       this.$emit("childLoaded")
     },
     async fetchNewToken(){
-      let client_id="1ab3b3ac54ba4d7daa64bc7d9d2af3f3";
-      let client_sc="7299d6d93ca948ffaf8a254fc52774de";
+      let client_id=process.env.CLIENT_ID;
+      let client_sc=process.env.CLIENT_SECRET;
       let options = {
           method: 'POST',
           headers: {

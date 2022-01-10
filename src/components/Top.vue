@@ -325,6 +325,10 @@ export default {
   }
   .changeTime{
     font-size: 3.5vw;
+    margin-top:4vw;
+  }
+  .top main{
+    margin-left: 2vw;
   }
   .grid, .grid-artist{
     grid-template-columns: repeat(2, 1fr);
