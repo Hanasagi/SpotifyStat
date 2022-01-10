@@ -25,7 +25,7 @@ export default {
       let scope =
         "user-top-read user-read-recently-played playlist-read-collaborative playlist-read-private user-follow-read";
       let redirect_uri = "https://spotifystat.netlify.app/redirect";
-      let client_id = "1ab3b3ac54ba4d7daa64bc7d9d2af3f3";
+      let client_id = process.env.CLIENT_ID;
       let state = Math.random().toString(36).substring(2, 15);
       localStorage.setItem("state", state);
       window.location.href =
@@ -39,8 +39,8 @@ export default {
         state;
     },
     async fetchNewToken() {
-      let client_id = "1ab3b3ac54ba4d7daa64bc7d9d2af3f3";
-      let client_sc = "7299d6d93ca948ffaf8a254fc52774de";
+      let client_id = process.env.CLIENT_ID;
+      let client_sc = process.env.CLIENT_SECRET;
       let options = {
         method: "POST",
         headers: {
