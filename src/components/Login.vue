@@ -22,6 +22,7 @@ export default {
       }
     },
     authorize() {
+    console.log(process.env.CLIENT_ID)
       let scope =
         "user-top-read user-read-recently-played playlist-read-collaborative playlist-read-private user-follow-read";
       let redirect_uri = "https://spotifystat.netlify.app/redirect";
