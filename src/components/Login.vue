@@ -24,7 +24,7 @@ export default {
     authorize() {
       let scope =
         "user-top-read user-read-recently-played playlist-read-collaborative playlist-read-private user-follow-read";
-      let redirect_uri = "http://localhost:8080/redirect";
+      let redirect_uri = "https://spotifystat.netlify.app/redirect";
       let client_id = "1ab3b3ac54ba4d7daa64bc7d9d2af3f3";
       let state = Math.random().toString(36).substring(2, 15);
       localStorage.setItem("state", state);
