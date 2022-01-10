@@ -10,7 +10,6 @@
 export default {
   name: "Login",
   mounted() {
-  console.log(process.env.VUE_APP_CLIENT_ID)
     this.isLoggedOn();
   },
   methods: {
@@ -26,7 +25,7 @@ export default {
       let scope =
         "user-top-read user-read-recently-played playlist-read-collaborative playlist-read-private user-follow-read";
       let redirect_uri = "https://spotifystat.netlify.app/redirect";
-      let client_id = process.env.CLIENT_ID;
+      let client_id = process.env.VUE_APP_CLIENT_ID;
       let state = Math.random().toString(36).substring(2, 15);
       localStorage.setItem("state", state);
       window.location.href =
@@ -40,8 +39,8 @@ export default {
         state;
     },
     async fetchNewToken() {
-      let client_id = process.env.CLIENT_ID;
-      let client_sc = process.env.CLIENT_SECRET;
+      let client_id = process.env.VUE_APP_CLIENT_ID;
+      let client_sc = process.env.VUE_APP_LIENT_SECRET;
       let options = {
         method: "POST",
         headers: {
