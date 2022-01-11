@@ -18,8 +18,8 @@ export default {
 			this.fetchToken(code);
 		},
 		async fetchToken(code){
-			let client_id=process.env.VUE_APP_CLIENT_ID;
-			let client_sc=process.env.VUE_APP_CLIENT_SECRET;
+			let client_id = process.env.VUE_APP_CLIENT_ID;
+      let client_sc = process.env.VUE_APP_LIENT_SECRET;
 			let options = {
           method: 'POST',
           headers: {
@@ -29,7 +29,7 @@ export default {
           body: new URLSearchParams({
             "grant_type": 'authorization_code',
             "code": code,
-            "redirect_uri": "https://spotifystat.netlify.app/redirect",
+            "redirect_uri": /*"https://spotifystat.netlify.app/redirect"*/ "http://localhost:8080/redirect",
           })
         }
         //eslint-disable-next-line

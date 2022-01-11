@@ -105,6 +105,7 @@ export default {
       topTracks: null,
       topArtists: null,
       loading: true,
+      loaded:0,
     };
   },
   mounted() {},
@@ -114,10 +115,9 @@ export default {
   },
   methods: {
     childIsReady() {
-      console.log("parent 1");
       if (
         this.$cookies.get("token") === null ||
-        this.$cookies.get("token") === undefined
+        this.$cookies.get("token") === "undefined"
       ) {
         this.$router.push({ name: "Login" });
       }
@@ -125,7 +125,6 @@ export default {
         if (localStorage.getItem("state") != null) {
           localStorage.removeItem("state");
         }
-        console.log(this.$cookies.get("token"));
         this.fetchTopItems();
         this.fetchUserInfo();
       }
@@ -324,7 +323,6 @@ export default {
       this.user = JSON.parse(localStorage.getItem("user"));
       this.topTracks = JSON.parse(localStorage.getItem("topTrackAllTime"));
       this.topArtists = JSON.parse(localStorage.getItem("topArtistAllTime"));
-      console.log(this.user, this.topTracks, this.topArtists);
       this.loading = false;
     },
     goTo(e) {

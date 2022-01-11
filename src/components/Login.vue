@@ -14,18 +14,17 @@ export default {
   },
   methods: {
     async isLoggedOn() {
-      if (this.$cookies.get("token") !== null) {
-        if (Date.now() > localStorage.getItem("expires_in")) {
-          await this.fetchNewToken();
-        }
+      console.log(this.$cookies.get("token") !== null && this.$cookies.get("token") !== "undefined")
+      if (this.$cookies.get("token") !== null && this.$cookies.get("token") !== "undefined") {
         this.$router.push({ name: "Home" });
       }
     },
     authorize() {
       let scope =
         "user-top-read user-read-recently-played playlist-read-collaborative playlist-read-private user-follow-read";
-      let redirect_uri = "https://spotifystat.netlify.app/redirect";
+      let redirect_uri = /*"https://spotifystat.netlify.app/redirect"*/ "http://localhost:8080/redirect";
       let client_id = process.env.VUE_APP_CLIENT_ID;
+      
       let state = Math.random().toString(36).substring(2, 15);
       localStorage.setItem("state", state);
       window.location.href =
@@ -46,7 +45,7 @@ export default {
         headers: {
           Authorization:
             "Basic " +
-            new Buffer(client_id + ":" + client_sc).toString("base64"),
+            Buffer.from(client_id + ":" + client_sc).toString("base64"),
           "Content-Type": "application/x-www-form-urlencoded",
         },
         body: new URLSearchParams({

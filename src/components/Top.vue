@@ -126,7 +126,6 @@ export default {
       this.sixMonthsTop = this.setItem("topArtist6Months");
       this.fourWeeksTop = this.setItem("topArtist4Weeks");
     }
-    console.log(this.fourWeeksTop)
     this.loading = false;
   },
   methods: {

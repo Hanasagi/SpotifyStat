@@ -7,24 +7,22 @@ export default {
   name: 'Token',
   emits: ["childLoaded"],
   mounted(){
-    console.log("child 1")
-    this.isLoggedOn();
-    console.log("child 2")
+    this.checkToken();
   },
   methods:{
-    async isLoggedOn(){
-      if(this.$cookies.get("token")!==null || Date.now()>localStorage.getItem("expires_in")){
+    async checkToken(){
+      if((this.$cookies.get("token") !== null && this.$cookies.get("token") !== "undefined")|| Date.now()>localStorage.getItem("expires_in") && (localStorage.getItem("expires_in")!==null || localStorage.getItem("expires_in")!==undefined)){
           await this.fetchNewToken();
       }
       this.$emit("childLoaded")
     },
     async fetchNewToken(){
-      let client_id=process.env.VUE_APP_CLIENT_ID;
-      let client_sc=process.env.VUE_APP_CLIENT_SECRET;
+      let client_id = process.env.VUE_APP_CLIENT_ID;
+      let client_sc = process.env.VUE_APP_LIENT_SECRET;
       let options = {
           method: 'POST',
           headers: {
-            'Authorization': 'Basic ' + (new Buffer(client_id + ':' + client_sc).toString('base64')),
+            'Authorization': 'Basic ' + (Buffer.from(client_id + ':' + client_sc).toString('base64')),
             'Content-Type':'application/x-www-form-urlencoded'
           },
           body: new URLSearchParams({
