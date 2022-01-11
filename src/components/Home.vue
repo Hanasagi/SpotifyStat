@@ -318,11 +318,14 @@ export default {
         "topArtist4Weeks",
         JSON.stringify(topArtistsShortTerm)
       );
+
+      this.topTracks=topTracksLongTerm;
+      this.topArtists=topTracksLongTerm;
     },
     updateInfo() {
-      this.user = JSON.parse(localStorage.getItem("user"));
-      this.topTracks = JSON.parse(localStorage.getItem("topTrackAllTime"));
-      this.topArtists = JSON.parse(localStorage.getItem("topArtistAllTime"));
+      this.user = JSON.parse(localStorage.getItem("user")) || this.user;
+      this.topTracks = JSON.parse(localStorage.getItem("topTrackAllTime")) || this.topTracks;
+      this.topArtists = JSON.parse(localStorage.getItem("topArtistAllTime")) || this.topArtists;
       this.loading = false;
     },
     goTo(e) {
