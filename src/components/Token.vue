@@ -23,8 +23,7 @@ export default {
           method: 'POST',
            mode:"cors",
           headers: {
-            'Authorization': 'Basic ' + (Buffer.from(client_id + ':' + client_sc).toString('base64')),
-            'Content-Type':'application/x-www-form-urlencoded'
+            'Authorization': 'Basic ' + (Buffer.from(client_id + ':' + client_sc).toString('base64'))
           },
           body: new URLSearchParams({
             "grant_type": 'refresh_token',

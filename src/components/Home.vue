@@ -134,8 +134,7 @@ export default {
       let headers = {
          mode:"cors",
         headers: {
-          Authorization: `Bearer ${this.$cookies.get("token")}`,
-          Content: "application/json",
+          Authorization: `Bearer ${this.$cookies.get("token")}`
         },
       };
 
