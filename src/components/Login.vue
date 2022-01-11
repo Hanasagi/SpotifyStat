@@ -10,7 +10,7 @@
 export default {
   name: "Login",
   mounted() {
-  console.log(process.env.VUE_APP_CLIENT_ID)
+  console.log(process.env.VUE_APP_CLIENT_SECRET)
     this.isLoggedOn();
   },
   methods: {
