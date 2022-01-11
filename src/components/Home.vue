@@ -114,7 +114,7 @@ export default {
     Navbar,
   },
   methods: {
-    childIsReady() {
+    async childIsReady() {
       if (
         this.$cookies.get("token") === null ||
         this.$cookies.get("token") === "undefined"
@@ -125,8 +125,8 @@ export default {
         if (localStorage.getItem("state") != null) {
           localStorage.removeItem("state");
         }
-        this.fetchTopItems();
-        this.fetchUserInfo();
+        await this.fetchTopItems();
+        await this.fetchUserInfo();
       }
       this.updateInfo();
     },
@@ -189,6 +189,7 @@ export default {
       user.push({ playlistNumber: getUserPlaylist.total });
       await AsyncLocalStorage.setItem("user", JSON.stringify(user));
       this.user = user;
+      console.log("🚀 ~ file: Home.vue ~ line 192 ~ fetchUserInfo ~ this.user", this.user)
     },
     async fetchTopItems() {
       let headers = {
@@ -318,11 +319,16 @@ export default {
         "topArtist4Weeks",
         JSON.stringify(topArtistsShortTerm)
       );
+
+      this.topTracks=topTracksLongTerm;
+      console.log("🚀 ~ file: Home.vue ~ line 324 ~ fetchTopItems ~ this.topTracks", this.topTracks)
+      this.topArtists=topTracksLongTerm;
+      console.log("🚀 ~ file: Home.vue ~ line 326 ~ fetchTopItems ~ this.topArtists", this.topArtists)
     },
     updateInfo() {
-      this.user = JSON.parse(localStorage.getItem("user"));
-      this.topTracks = JSON.parse(localStorage.getItem("topTrackAllTime"));
-      this.topArtists = JSON.parse(localStorage.getItem("topArtistAllTime"));
+      this.user = JSON.parse(localStorage.getItem("user")) || this.user;
+      this.topTracks = JSON.parse(localStorage.getItem("topTrackAllTime")) || this.topTracks;
+      this.topArtists = JSON.parse(localStorage.getItem("topArtistAllTime")) || this.topArtists;
       this.loading = false;
     },
     goTo(e) {
@@ -349,10 +355,13 @@ export default {
 </script>
 
 <style scoped>
-.home {
+.home,.loading {
   width: 100vw;
   background: linear-gradient(to top, #281430, #4b2455);
   color: white;
+}
+.loading{
+  height:100vh;
 }
 
 .right-wrapper {

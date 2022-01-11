@@ -18,7 +18,7 @@ export default {
 			this.fetchToken(code);
 		},
 		async fetchToken(code){
-			let client_id = process.env.VUE_APP_CLIENT_ID;
+    let client_id = process.env.VUE_APP_CLIENT_ID;
       let client_sc = process.env.VUE_APP_CLIENT_SECRET;
 			let options = {
           method: 'POST',
