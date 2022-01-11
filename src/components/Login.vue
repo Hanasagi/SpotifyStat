@@ -42,6 +42,7 @@ export default {
       let client_sc = process.env.VUE_APP_CLIENT_SECRET;
       let options = {
         method: "POST",
+         mode:"cors",
         headers: {
           Authorization:
             "Basic " +

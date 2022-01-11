@@ -22,6 +22,7 @@ export default {
       let client_sc = process.env.VUE_APP_CLIENT_SECRET;
 			let options = {
           method: 'POST',
+          mode:"cors",
           headers: {
             'Authorization': 'Basic ' + (Buffer.from(client_id + ':' + client_sc).toString('base64')),
             'Content-Type':'application/x-www-form-urlencoded'
