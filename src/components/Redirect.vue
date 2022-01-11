@@ -29,7 +29,7 @@ export default {
           body: new URLSearchParams({
             "grant_type": 'authorization_code',
             "code": code,
-            "redirect_uri": /*"https://spotifystat.netlify.app/redirect"*/ "http://localhost:8080/redirect",
+            "redirect_uri": "https://spotifystat.netlify.app/redirect",
           })
         }
         //eslint-disable-next-line
