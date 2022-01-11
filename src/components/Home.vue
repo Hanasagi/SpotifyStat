@@ -127,7 +127,6 @@ export default {
         }
         this.fetchTopItems();
         this.fetchUserInfo();
-        window.location.reload();
       }
       this.updateInfo();
     },
