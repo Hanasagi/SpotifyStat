@@ -39,7 +39,7 @@ export default {
     },
     async fetchNewToken() {
       let client_id = process.env.VUE_APP_CLIENT_ID;
-      let client_sc = process.env.VUE_APP_LIENT_SECRET;
+      let client_sc = process.env.VUE_APP_CLIENT_SECRET;
       let options = {
         method: "POST",
         headers: {
