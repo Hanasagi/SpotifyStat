@@ -14,7 +14,7 @@ export default {
   },
   methods: {
     async isLoggedOn() {
-      console.log(process.env.VUE_APP_CLIENT_SECRET)
+      console.log(this.$cookies.get("token") !== null && this.$cookies.get("token") !== "undefined")
       if (this.$cookies.get("token") !== null && this.$cookies.get("token") !== "undefined") {
         this.$router.push({ name: "Home" });
       }
