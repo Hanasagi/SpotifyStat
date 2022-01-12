@@ -141,7 +141,7 @@ export default {
 
       let getArtistFollow = await spotify.getFollowedArtists().then((r) => {return r;}).catch((err) => console.error(err.message));
       
-      let getUserPlaylist = await spotify.getFollowedArtists(getUserInfo.id).then((r) => {return r;}).catch((err) => console.error(err.message));
+      let getUserPlaylist = await spotify.getUserPlaylist(getUserInfo.id).then((r) => {return r;}).catch((err) => console.error(err.message));
 
       let user = [];
       this.$cookies.set("userId", getUserInfo.id);
