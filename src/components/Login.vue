@@ -22,8 +22,8 @@ export default {
     authorize() {
       let scope =
         "user-top-read user-read-recently-played playlist-read-collaborative playlist-read-private user-follow-read";
-      let redirect_uri = /*"https://spotifystat.netlify.app/redirect"*/ "http://localhost:8080/redirect";
-      let client_id = process.env.VUE_APP_CLIENT_ID || "1ab3b3ac54ba4d7daa64bc7d9d2af3f3";
+      let redirect_uri = "https://spotifystat.netlify.app/redirect";
+      let client_id = process.env.VUE_APP_CLIENT_ID;
       
       let state = Math.random().toString(36).substring(2, 15);
       localStorage.setItem("state", state);
@@ -38,8 +38,8 @@ export default {
         state;
     },
     async fetchNewToken() {
-    let client_id = process.env.VUE_APP_CLIENT_ID || "1ab3b3ac54ba4d7daa64bc7d9d2af3f3";
-      let client_sc = process.env.VUE_APP_CLIENT_SECRET || "e07f073d3d2447ffab5a9a3d2597e17b";
+    let client_id = process.env.VUE_APP_CLIENT_ID;
+      let client_sc = process.env.VUE_APP_CLIENT_SECRET;
       let options = {
         method: "POST",
          mode:"cors",

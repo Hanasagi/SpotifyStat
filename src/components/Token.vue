@@ -17,8 +17,8 @@ export default {
       this.$emit("childLoaded")
     },
     async fetchNewToken(){
-      let client_id = process.env.VUE_APP_CLIENT_ID || "1ab3b3ac54ba4d7daa64bc7d9d2af3f3";
-      let client_sc = process.env.VUE_APP_CLIENT_SECRET || "e07f073d3d2447ffab5a9a3d2597e17b";
+      let client_id = process.env.VUE_APP_CLIENT_ID;
+      let client_sc = process.env.VUE_APP_CLIENT_SECRET;
       let options = {
           method: 'POST',
            mode:"cors",
