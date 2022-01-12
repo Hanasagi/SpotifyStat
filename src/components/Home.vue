@@ -2,7 +2,9 @@
   <div class="home">
     <Token @childLoaded="childIsReady" />
     <div v-if="loading">
-      <div class="loading"></div>
+      <div class="loading">
+        <img :src="loadingSVG" alt="">
+      </div>
     </div>
     <main v-else>
       <Navbar />
@@ -95,6 +97,7 @@
 import Token from "./Token.vue";
 import Navbar from "./Navbar.vue";
 import AsyncLocalStorage from "@createnextapp/async-local-storage";
+import Spotify from 'spotify-web-api-js';
 
 export default {
   name: "Home",
@@ -105,7 +108,7 @@ export default {
       topTracks: null,
       topArtists: null,
       loading: true,
-      loaded:0,
+      loadingSVG: require("@/assets/loading.svg")
     };
   },
   mounted() {},
@@ -122,63 +125,23 @@ export default {
         this.$router.push({ name: "Login" });
       }
       if (localStorage.getItem("state") !== null) {
+        let s = new Spotify();
+        s.setAccessToken(this.$cookies.get("token"));
         if (localStorage.getItem("state") != null) {
           localStorage.removeItem("state");
         }
-        await this.fetchTopItems();
-        await this.fetchUserInfo();
+        await this.fetchTopItems(s);
+        await this.fetchUserInfo(s);
       }
       this.updateInfo();
     },
-    async fetchUserInfo() {
-      let headers = {
-         mode:"cors",
-        headers: {
-          Authorization: `Bearer ${this.$cookies.get("token")}`
-        },
-      };
+    async fetchUserInfo(spotify) {
 
-      let getUserInfo = await fetch(this.API_URL + "/me", headers)
-        .then((response) => {
-          return response;
-        })
-        .then((response) => {
-          return response.json();
-        })
-        .then((response) => {
-          return response;
-        })
-        .catch((error) => console.error(error.message));
+      let getUserInfo = await spotify.getMe().then((r) => {return r;}).catch((err) => console.error(err.message));
 
-      let getArtistFollow = await fetch(
-        this.API_URL + "/me/following?type=artist",
-        headers
-      )
-        .then((response) => {
-          return response;
-        })
-        .then((response) => {
-          return response.json();
-        })
-        .then((response) => {
-          return response;
-        })
-        .catch((error) => console.error(error.message));
-
-      let getUserPlaylist = await fetch(
-        this.API_URL + `/users/${getUserInfo.id}/playlists`,
-        headers
-      )
-        .then((response) => {
-          return response;
-        })
-        .then((response) => {
-          return response.json();
-        })
-        .then((response) => {
-          return response;
-        })
-        .catch((error) => console.error(error.message));
+      let getArtistFollow = await spotify.getFollowedArtists().then((r) => {return r;}).catch((err) => console.error(err.message));
+      
+      let getUserPlaylist = await spotify.getFollowedArtists(getUserInfo.id).then((r) => {return r;}).catch((err) => console.error(err.message));
 
       let user = [];
       this.$cookies.set("userId", getUserInfo.id);
@@ -189,109 +152,24 @@ export default {
       user.push({ playlistNumber: getUserPlaylist.total });
       await AsyncLocalStorage.setItem("user", JSON.stringify(user));
       this.user = user;
-      console.log("🚀 ~ file: Home.vue ~ line 192 ~ fetchUserInfo ~ this.user", this.user)
     },
-    async fetchTopItems() {
-      let headers = {
-        headers: {
-          Authorization: `Bearer ${this.$cookies.get("token")}`,
-          Content: "application/json",
-        },
-      };
+    async fetchTopItems(spotify) {
 
       //Top Artists
 
-      let topArtistsLongTerm = await fetch(
-        this.API_URL + `/me/top/artists?limit=50&time_range=long_term`,
-        headers
-      )
-        .then((response) => {
-          return response;
-        })
-        .then((response) => {
-          return response.json();
-        })
-        .then((response) => {
-          return response;
-        })
-        .catch((error) => console.error(error.message));
+      let topArtistsLongTerm = await spotify.getMyTopArtists({ limit: 50, time_range: "long_term" }).then((r) => {return r;}).catch((err) => console.error(err.message));
 
-      let topArtistsMediumTerm = await fetch(
-        this.API_URL + `/me/top/artists?limit=50`,
-        headers
-      )
-        .then((response) => {
-          return response;
-        })
-        .then((response) => {
-          return response.json();
-        })
-        .then((response) => {
-          return response;
-        })
-        .catch((error) => console.error(error.message));
-
-      let topArtistsShortTerm = await fetch(
-        this.API_URL + `/me/top/artists?limit=50&time_range=short_term`,
-        headers
-      )
-        .then((response) => {
-          return response;
-        })
-        .then((response) => {
-          return response.json();
-        })
-        .then((response) => {
-          return response;
-        })
-        .catch((error) => console.error(error.message));
+      let topArtistsMediumTerm = await spotify.getMyTopArtists({ limit: 50 }).then((r) => {return r;}).catch((err) => console.error(err.message));
+      
+      let topArtistsShortTerm = await spotify.getMyTopArtists({ limit: 50, time_range: "short_term" }).then((r) => {return r;}).catch((err) => console.error(err.message));
 
       //Top Tracks
 
-      let topTracksLongTerm = await fetch(
-        this.API_URL + `/me/top/tracks?limit=50&time_range=long_term`,
-        headers
-      )
-        .then((response) => {
-          return response;
-        })
-        .then((response) => {
-          return response.json();
-        })
-        .then((response) => {
-          return response;
-        })
-        .catch((error) => console.error(error.message));
+      let topTracksLongTerm = await spotify.getMyTopTracks({ limit: 50, time_range: "long_term" }).then((r) => {return r;}).catch((err) => console.error(err.message));
 
-      let topTracksMediumTerm = await fetch(
-        this.API_URL + `/me/top/tracks?limit=50`,
-        headers
-      )
-        .then((response) => {
-          return response;
-        })
-        .then((response) => {
-          return response.json();
-        })
-        .then((response) => {
-          return response;
-        })
-        .catch((error) => console.error(error.message));
-
-      let topTracksShortTerm = await fetch(
-        this.API_URL + `/me/top/tracks?limit=50&time_range=short_term`,
-        headers
-      )
-        .then((response) => {
-          return response;
-        })
-        .then((response) => {
-          return response.json();
-        })
-        .then((response) => {
-          return response;
-        })
-        .catch((error) => console.error(error.message));
+      let topTracksMediumTerm = await spotify.getMyTopTracks({ limit: 50 }).then((r) => {return r;}).catch((err) => console.error(err.message));
+      
+      let topTracksShortTerm = await spotify.getMyTopTracks({ limit: 50, time_range: "short_term" }).then((r) => {return r;}).catch((err) => console.error(err.message));
 
       //Store Item
 
@@ -321,9 +199,7 @@ export default {
       );
 
       this.topTracks=topTracksLongTerm;
-      console.log("🚀 ~ file: Home.vue ~ line 324 ~ fetchTopItems ~ this.topTracks", this.topTracks)
       this.topArtists=topTracksLongTerm;
-      console.log("🚀 ~ file: Home.vue ~ line 326 ~ fetchTopItems ~ this.topArtists", this.topArtists)
     },
     updateInfo() {
       this.user = JSON.parse(localStorage.getItem("user")) || this.user;
@@ -362,6 +238,8 @@ export default {
 }
 .loading{
   height:100vh;
+  display:grid;
+  place-content: center;
 }
 
 .right-wrapper {
