@@ -76,7 +76,7 @@
               :key="index"
               class="user-artist"
               :data-link="
-                'https://open.spotify.com/album/' + topArtists.items[index].id
+                'https://open.spotify.com/artist/' + topArtists.items[index].id
               "
               @click="openSpotify"
             >
